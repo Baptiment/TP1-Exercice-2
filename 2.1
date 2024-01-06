@@ -1,0 +1,35 @@
+/********************************************************
+ * PID Basic Example
+ * Reading analog input 0 to control analog PWM output 3
+ ********************************************************/
+
+#include <PID_v1.h>
+
+#define PIN_INPUT 0
+#define PIN_OUTPUT 11
+
+//Define Variables we'll be connecting to
+double Setpoint, Input, Output;
+
+//Specify the links and initial tuning parameters
+double Kp=0, Ki=10, Kd=0;
+PID myPID(&Input, &Output, &Setpoint, Kp, Ki, Kd, DIRECT);
+
+void setup()
+{
+  //initialize the variables we're linked to
+  Input = analogRead(PIN_INPUT); //la variable Input correspond à la lecture analogique de l'entrée 
+  Setpoint = 30; // la valeur de déclenchement de la LED est inférieure ou égale à 30
+
+  //turn the PID on
+  myPID.SetMode(AUTOMATIC);
+}
+// création de la boucle
+void loop()
+{
+  Input = analogRead(PIN_INPUT); //lecture de la variable Input
+  myPID.Compute();
+  analogWrite(PIN_OUTPUT, Output); // Ecrire la valeur analogique de la sortie 
+}
+
+
