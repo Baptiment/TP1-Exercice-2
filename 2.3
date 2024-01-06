@@ -1,0 +1,39 @@
+/********************************************************
+ * PID Basic Example
+ * Reading analog input 0 to control analog PWM output 3
+ ********************************************************/
+int pot = A1;
+int potvalue = 0;
+#include <PID_v1.h>
+#define PIN_INPUT 0
+#define PIN_OUTPUT 11
+
+//Define Variables we'll be connecting to
+double Setpoint, Input, Output;
+
+//Specify the links and initial tuning parameters
+double Kp=0, Ki=10, Kd=0;
+PID myPID(&Input, &Output, &Setpoint, Kp, Ki, Kd, DIRECT);
+
+void setup()
+{
+  //initialize the variables we're linked to
+  Input = analogRead(PIN_INPUT); //la variable Input correspond à la lecture analogique de l'entrée 
+  Serial.begin(9600); 
+
+  //turn the PID on
+  myPID.SetMode(AUTOMATIC);
+}
+// création de la boucle
+void loop()
+{
+  potvalue = analogRead(A1);
+  potvalue = potvalue/4;
+  Setpoint = potvalue;
+  Input = analogRead(PIN_INPUT); //lecture de la variable Input
+  myPID.Compute();
+  analogWrite(PIN_OUTPUT, Output); // Ecrire la valeur analogique de la sortie 
+  Serial.println(Output);
+  Serial.println(Setpoint);
+}
+
