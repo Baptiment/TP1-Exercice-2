@@ -48,11 +48,11 @@ void loop(){
   now = millis(); // Marque du temps
   if(now - lastMessage > serialPing) { 
     Serial.print("Consigne = ");// Affiche "Consigne ="
-    Serial.print(Consigne);// Affiche la veleur de la consigne
+    Serial.print(Consigne);// Affiche la valeur de la consigne
     Serial.print(" Entree = ");// Affiche "Entree ="
-    Serial.print(Entree); // Affiche la veleur de la consigne
+    Serial.print(Entree); // Affiche la valeur de la consigne
     Serial.print(" Sortie = ");// Affiche "Sortie ="
-    Serial.print(Sortie); // Affiche la veleur de la Sortie
+    Serial.print(Sortie); // Affiche la valeur de la Sortie
     Serial.print("\n"); // Affiche "\n"
     if (Serial.available() > 0) { //Nous voulons mettre a jour Kp, Ki et Kd
       for (int x = 0; x < 4; x++) {
