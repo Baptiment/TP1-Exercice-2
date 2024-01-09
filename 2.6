@@ -13,9 +13,9 @@ const int led = 11; // pin de la led
 double lightLevel; // variable qui stocke le niveau de lumière entrant
 
 // parametres de régulation
-float Kp=0; // valeur initiale du gain proportionnel 
-float Ki=10; // valeur initiale du gain intégral 
-float Kd=0;  // valeur initiale du gain différentiel
+float Kp=5; // valeur initiale du gain proportionnel 
+float Ki=0.5; // valeur initiale du gain intégral 
+float Kd=5;  // valeur initiale du gain différentiel
 
 double Consigne, Entree, Sortie;  //Variables pour stocker les valeurs
 PID myPID(&Entree, &Sortie, &Consigne, Kp, Ki, Kd, DIRECT); 
